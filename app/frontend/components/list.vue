@@ -6,9 +6,11 @@
     
 
       <div class="input-area">
-        <textarea rows="3" class="content" v-model="content"></textarea>
-        <button class="button" @click="createCard">Create Card</button>
-        <button class="button">Cancel</button>
+        <button v-if="!editing" class="button bg-gray-400" @click="newCard">New Card</button>
+
+        <textarea v-if="editing" rows="3" class="content" v-model="content"></textarea>
+        <button v-if="editing" class="button bg-green-400" @click="createCard">Create Card</button>
+        <button v-if="editing" class="button bg-gray-400" @click="editing = false">Cancel</button>
       </div>
     </div>
   </div>
@@ -25,10 +27,15 @@ export default {
   data: function() {
     return {
       content: '',
-      cards: this.list.cards
+      cards: this.list.cards,
+      editing: false
     }
   },
   methods: {
+    newCard(event) {
+      event.preventDefault();
+      this.editing = true;
+    },
     createCard(event) {
       event.preventDefault();
 
@@ -44,6 +51,7 @@ export default {
         success: resp => {
           this.cards.push(resp);
           this.content = '';
+          this.editing = false;
         },
         error: err => {
           console.log(err)
@@ -77,7 +85,7 @@ export default {
     }
 
     .button {
-      @apply .bg-gray-400 .rounded-sm .px-3 .py-1 .text-sm .font-semibold;
+      @apply .rounded-sm .px-3 .py-1 .text-sm .font-semibold;
 
       &:focus {
         @apply .outline-none;
