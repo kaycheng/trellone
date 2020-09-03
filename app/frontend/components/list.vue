@@ -95,7 +95,11 @@ export default {
 }
 
 .list {
-  @apply .bg-gray-300 .mx-2 .w-64 .rounded .px-3 .py-1;
+  @apply .bg-gray-300 .mx-2 .w-64 .rounded .p-3 .flex-none .h-full;
+
+  &:hover {
+    @apply .cursor-pointer;
+  }
 
   .header {
     @apply .font-bold;
