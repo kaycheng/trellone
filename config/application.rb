@@ -13,7 +13,7 @@ module Trellone
     config.time_zone = 'Asia/Taipei'
 
     config.generators do |g|
-      g.assests false
+      g.assets false
       g.helper false
       g.test_framework false
     end
